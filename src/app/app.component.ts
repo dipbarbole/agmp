@@ -7,6 +7,6 @@ import { UserEntity } from './user-entity.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  userEntity: UserEntity = {id:1, firstName: 'Rahul', lastName: 'Patil'};
+  userEntity: UserEntity = {id: 1, firstName: 'Rahul', lastName: 'Patil'};
   title = 'my-app';
 }
