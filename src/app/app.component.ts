@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { USER_DATA } from './constant';
 import { UserEntity } from './user-entity.model';
 
 @Component({
@@ -7,6 +8,6 @@ import { UserEntity } from './user-entity.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  userEntity: UserEntity = {id: 1, firstName: 'Rahul', lastName: 'Patil'};
+  IuserEntity: UserEntity = USER_DATA;
   title = 'my-app';
 }
