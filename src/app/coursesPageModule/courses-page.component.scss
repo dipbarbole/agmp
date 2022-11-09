@@ -1,0 +1,37 @@
+app-courses-page {
+    .course-page-container {
+        .course-list-content {
+            height: calc(100vh - 276px);
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .course-list-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .load-more-button {
+            padding: 15px 0px;
+            margin: 15px 0px;
+            border: 1px solid rgb(189, 186, 186);
+            border-radius: 6px;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+
+        .search-field {
+            margin: 10px 0px;
+            .btn {
+                background-color: #9bc837 !important;
+            }
+        }
+
+        .add-course-button {
+            margin-bottom: 10px;
+            .btn {
+                background-color: #30b6dd !important;
+            }
+        }
+
+    }
+}
