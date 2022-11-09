@@ -1,1 +1,31 @@
-<p>courses-page works!</p>
+<div class="course-page-container">
+  <div class="row">
+    <div class="col-12 search-field">
+      <form class="d-inline-flex">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          [(ngModel)]="searchText"
+          name="searchText"
+        />
+        <button class="btn btn-success" (click)="searchAction()" type="button">Search</button>
+      </form>
+    </div>
+    <div class="col-12 add-course-button d-flex justify-content-end">
+      <button class="btn btn-primary">+ Add Course</button>
+    </div>
+  </div>
+  <div class="course-list-content">
+    <div>
+        <app-course-item
+          *ngFor="let course of courses; trackBy: identify"
+          [course]="course"
+          (courseId)="deleteCourseById($event)"
+        ></app-course-item>
+      </div>
+      <div class="text-center load-more-button col-12">
+        <a href="#">LOAD MORE</a>
+      </div>
+  </div>
+</div>

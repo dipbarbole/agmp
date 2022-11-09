@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BreadcrumbsModule } from './breadcrumbs/breadcrumbs.module';
 import { FooterModule } from './footer/footer.module';
 import { HeaderModule } from './header/header.module';
-import { LogoModule } from './logo/logo.module';
 import { CoursesPageModule } from './pages/courses-page/courses-page.module';
 
 @NgModule({
@@ -17,8 +17,8 @@ import { CoursesPageModule } from './pages/courses-page/courses-page.module';
     AppRoutingModule,
     HeaderModule,
     FooterModule,
-    LogoModule,
-    CoursesPageModule
+    CoursesPageModule,
+    BreadcrumbsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
