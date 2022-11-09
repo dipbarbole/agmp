@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { USER_DATA } from './constants/constant';
-import { UserEntity } from './interfaces/user-entity.model';
+import { USER_DATA } from '../constants/constant';
+import { UserEntity } from '../interfaces/user-entity.model';
 
 @Component({
   selector: 'app-root',

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { Course } from '../../../interfaces/course.model';
+import { Course } from '../../interfaces/course.model';
 
 @Component({
   selector: 'app-course-item',

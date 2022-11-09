@@ -19,7 +19,7 @@
   <div class="course-list-content">
     <div>
         <app-course-item
-          *ngFor="let course of courses; trackBy: identify"
+          *ngFor="let course of courses; trackBy: trackFunction"
           [course]="course"
           (courseId)="deleteCourseById($event)"
         ></app-course-item>

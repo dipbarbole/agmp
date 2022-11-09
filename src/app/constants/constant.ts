@@ -1,5 +1,5 @@
 import { UserEntity } from '../interfaces/user-entity.model';
-import { Course } from '../interfaces/course.model';
+import { Course } from '../coursesPageModule/interfaces/course.model';
 
 export const USER_DATA: UserEntity = {
   id: 1,

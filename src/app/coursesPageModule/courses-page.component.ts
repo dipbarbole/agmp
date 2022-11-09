@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { COURSES_LIST } from 'src/app/constants/constant';
-import { Course } from '../../interfaces/course.model';
+import { Course } from './interfaces/course.model';
 
 @Component({
   selector: 'app-courses-page',
@@ -28,7 +28,7 @@ export class CoursesPageComponent implements OnInit {
     console.log(courseId);
   }
 
-  identify(index: any, item: { id: any }): any {
+  trackFunction(index: any, item: { id: any }): any {
     return item.id;
   }
 }
