@@ -1,0 +1,27 @@
+app-course-item {
+    .course-item-card {
+        margin: 0;
+        padding: 10px;
+        margin-top: 15px;
+        border: 1px solid rgb(189, 186, 186);
+        border-radius: 6px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+        .btn {
+            background-color: #30b6dd !important;
+        }
+        .edit-delete-button {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .delete-btn {
+                cursor: pointer;
+            }
+        }
+
+        .card-desc {
+            margin-top: 10px;
+        }
+    }
+}

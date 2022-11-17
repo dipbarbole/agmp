@@ -1,0 +1,22 @@
+<div class="row course-item-card">
+  <div class="col-10">
+    <div class="row card-body">
+      <div class="col-8">
+        <h5 class="card-title">{{ course?.title }}</h5>
+      </div>
+      <div class="col-4 edit-delete-button">
+        <span>{{ course?.duration }} min</span>
+        <span>{{ course?.creationDate | date }}</span>
+      </div>
+      <div class="col-12 card-desc">
+        <p>
+          {{ course?.description }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-2 edit-delete-button">
+    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+    <a href="#" class="delete-btn btn btn-primary btn-sm" (click)="deleteCourse(course?.id)">Delete</a>
+  </div>
+</div>
