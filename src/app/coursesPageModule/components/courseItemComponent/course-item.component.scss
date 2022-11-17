@@ -14,6 +14,10 @@ app-course-item {
             display: flex;
             justify-content: space-around;
             align-items: center;
+
+            .delete-btn {
+                cursor: pointer;
+            }
         }
 
         .card-desc {

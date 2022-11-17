@@ -20,4 +20,11 @@ describe('BreadcrumbsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render breadcrumb title', () => {
+    const fixture = TestBed.createComponent(BreadcrumbsComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.breadcrumb-container p')?.textContent).toContain('Courses');
+  });
 });

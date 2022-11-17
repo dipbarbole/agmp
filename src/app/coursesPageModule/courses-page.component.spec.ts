@@ -20,4 +20,16 @@ describe('CoursesPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should console log text from search field while search button clicked', () => {
+    spyOn(console, 'log');
+    component.searchAction();
+    expect(console.log).toHaveBeenCalled();
+  });
+
+  it('should console log the course id while deleting', () => {
+    spyOn(console, 'log');
+    component.deleteCourseById(1);
+    expect(console.log).toHaveBeenCalled();
+  });
 });
