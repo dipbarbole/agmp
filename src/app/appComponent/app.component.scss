@@ -1,0 +1,18 @@
+app-root {
+    .header-footer {
+        background-color: #414452;
+        height: 60px;
+        color: #ffffff;
+    }
+
+    .content {
+        // height: calc(100vh - 170px);
+        // overflow-y: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .content::-webkit-scrollbar {
+        display: none;
+    }
+}

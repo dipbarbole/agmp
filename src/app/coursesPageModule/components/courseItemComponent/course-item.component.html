@@ -1,0 +1,44 @@
+<div
+  class="row course-item-card"
+  [ngClass]="{ 'top-rated': course.topRated }"
+  [customBorder]="course.creationDate"
+>
+  <div class="col-10">
+    <div class="row card-body">
+      <div class="col-8">
+        <h5 class="card-title">
+          {{ course?.title | uppercase }}
+          <i
+            *ngIf="course.topRated"
+            class="fa fa-star star-icon"
+            aria-hidden="true"
+          ></i>
+        </h5>
+      </div>
+      <div class="col-4 clock-calender">
+        <span
+          ><i class="fa fa-clock clock-calender-icon" aria-hidden="true"></i
+          >{{ course?.duration | courseDuration }}</span
+        >
+        <span
+          ><i class="fa fa-calendar clock-calender-icon" aria-hidden="true"></i
+          >{{ course?.creationDate | date: "dd MMM, yyyy" }}</span
+        >
+      </div>
+      <div class="col-12 card-desc">
+        <p>
+          {{ course?.description }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-2 edit-delete-button">
+    <a href="#" class="btn btn-primary btn-sm">Edit</a>
+    <a
+      href="#"
+      class="delete-btn btn btn-primary btn-sm"
+      (click)="deleteCourse(course?.id)"
+      >Delete</a
+    >
+  </div>
+</div>
