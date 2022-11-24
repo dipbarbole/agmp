@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { COURSES_LIST } from 'src/app/constants/constant';
+import { CourseFilterPipe } from '../shared/pipes/course-filter/course-filter.pipe';
 import { Course } from './interfaces/course.model';
 
 @Component({
@@ -13,15 +14,21 @@ export class CoursesPageComponent implements OnInit {
 
   courseList: Course[] = [];
   searchText: string = '';
+  isDataEmpty: boolean = false;
 
-  constructor() {}
+  constructor(private courseFilterPipe: CourseFilterPipe) {}
 
   ngOnInit(): void {
     this.courses = COURSES_LIST;
+    this.courseList = this.courses;
+    this.isDataEmpty = this.courseList.length === 0;
   }
 
   searchAction(): void {
-    console.log('Searched Text:', this.searchText);
+    this.courseList = this.courseFilterPipe.transform(
+      this.searchText,
+      this.courses);
+      this.isDataEmpty = this.courseList.length === 0;
   }
 
   deleteCourseById(courseId: number) {

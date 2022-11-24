@@ -5,6 +5,22 @@ app-courses-page {
             overflow-y: auto;
             -ms-overflow-style: none;
             scrollbar-width: none;
+
+            .no-data-wrapper {
+                height: 48px;
+                border-radius: 6px;
+                box-shadow: 0 1px 24px 0 rgba(18, 21, 35, 0.08);
+                display: flex;
+                justify-content: center;
+                margin: 15px 0px;
+                border: 1px solid black;
+
+                span {
+                    align-self: center;
+                    font-size: 12px;
+                    line-height: 1.5;
+                }
+            }
         }
 
         .course-list-content::-webkit-scrollbar {
@@ -21,6 +37,7 @@ app-courses-page {
 
         .search-field {
             margin: 10px 0px;
+
             .btn {
                 background-color: #9bc837 !important;
             }
@@ -28,6 +45,7 @@ app-courses-page {
 
         .add-course-button {
             margin-bottom: 10px;
+
             .btn {
                 background-color: #30b6dd !important;
             }

@@ -9,7 +9,9 @@
           [(ngModel)]="searchText"
           name="searchText"
         />
-        <button class="btn btn-success" (click)="searchAction()" type="button">Search</button>
+        <button class="btn btn-success" (click)="searchAction()" type="button">
+          Search
+        </button>
       </form>
     </div>
     <div class="col-12 add-course-button d-flex justify-content-end">
@@ -18,14 +20,17 @@
   </div>
   <div class="course-list-content">
     <div>
-        <app-course-item
-          *ngFor="let course of courses; trackBy: trackFunction"
-          [course]="course"
-          (courseId)="deleteCourseById($event)"
-        ></app-course-item>
-      </div>
-      <div class="text-center load-more-button col-12">
-        <a href="#">LOAD MORE</a>
-      </div>
+      <app-course-item
+        *ngFor="let course of courseList; trackBy: trackFunction"
+        [course]="course"
+        (courseId)="deleteCourseById($event)"
+      ></app-course-item>
+    </div>
+    <div *ngIf="isDataEmpty" class="no-data-wrapper">
+      <span> NO DATA. FEEL FREE TO ADD NEW COURSE </span>
+    </div>
+    <div class="text-center load-more-button col-12">
+      <a href="#">LOAD MORE</a>
+    </div>
   </div>
 </div>

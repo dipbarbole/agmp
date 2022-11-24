@@ -7,6 +7,7 @@ import { BreadcrumbsModule } from './breadCrumbsModule/breadcrumbs.module';
 import { FooterModule } from './components/footerComponent/footer.module';
 import { HeaderModule } from './headerModule/header.module';
 import { CoursesPageModule } from './coursesPageModule/courses-page.module';
+import '@fortawesome/fontawesome-free/js/all.js';
 
 @NgModule({
   declarations: [
