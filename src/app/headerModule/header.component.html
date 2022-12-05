@@ -2,10 +2,10 @@
     <div class="me-auto pt-3">
         <app-logo></app-logo>
     </div>
-    <div class="pt-3 pr-12">
+    <div *appIsAuthenticated="!isAuthenticated" class="pt-3 pr-12 user-info" (click)="getUserInfo()">
         <i class="fas fa-user pr-5"></i> <span>User Login</span>
     </div>
-    <div class="pt-3 pr-12">
+    <div *appIsAuthenticated="!isAuthenticated" class="pt-3 pr-12 logout" (click)="logout()">
         <i class="fas fa-right-from-bracket pr-5"></i> <span>Log Off</span>
     </div>
   </div>

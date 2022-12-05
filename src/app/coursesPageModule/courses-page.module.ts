@@ -7,7 +7,14 @@ import { CustomBorderDirective } from '../shared/directives/custom-border.direct
 import { CourseDurationPipe } from '../shared/pipes/course-duration/course-duration.pipe';
 import { CourseOrderByPipe } from '../shared/pipes/course-order/course-order.pipe';
 import { CourseFilterPipe } from '../shared/pipes/course-filter/course-filter.pipe';
+import { Route, RouterModule } from '@angular/router';
 
+const routes: Route[] = [
+  {
+    path: '',
+    component: CoursesPageComponent
+  }
+];
 
 
 @NgModule({
@@ -20,7 +27,8 @@ import { CourseFilterPipe } from '../shared/pipes/course-filter/course-filter.pi
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forChild(routes),
   ],
   exports: [
     CoursesPageComponent

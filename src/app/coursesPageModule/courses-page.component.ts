@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { COURSES_LIST } from 'src/app/constants/constant';
 import { CourseFilterPipe } from '../shared/pipes/course-filter/course-filter.pipe';
 import { Course } from './interfaces/course.model';
+import { CoursesService } from './services/courses.service';
 
 @Component({
   selector: 'app-courses-page',
@@ -16,10 +16,10 @@ export class CoursesPageComponent implements OnInit {
   searchText: string = '';
   isDataEmpty: boolean = false;
 
-  constructor(private courseFilterPipe: CourseFilterPipe) {}
+  constructor(private courseFilterPipe: CourseFilterPipe, private coursesService: CoursesService) {}
 
   ngOnInit(): void {
-    this.courses = COURSES_LIST;
+    this.refreshList();
     this.courseList = this.courses;
     this.isDataEmpty = this.courseList.length === 0;
   }
@@ -32,7 +32,16 @@ export class CoursesPageComponent implements OnInit {
   }
 
   deleteCourseById(courseId: number) {
-    console.log(courseId);
+    this.coursesService.deleteCourse(courseId);
+    console.log('Course has been deleted with id ', courseId);
+  }
+
+  loadMore(): void {
+    console.log('Load more');
+  }
+
+  refreshList(): void {
+    this.courses = this.coursesService.getAll();
   }
 
   trackFunction(index: any, item: { id: any }): any {

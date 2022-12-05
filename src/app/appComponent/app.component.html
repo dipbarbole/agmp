@@ -2,14 +2,14 @@
   <div class="row header-footer">
     <app-header></app-header>
   </div>
-  <div class="container">
+  <div class="container" *appIsAuthenticated="!isAuthenticated">
     <div class="row">
       <app-breadcrumbs></app-breadcrumbs>
     </div>
   </div>
   <div class="container content">
     <div class="row">
-      <app-courses-page></app-courses-page>
+      <router-outlet></router-outlet>
     </div>
   </div>
   <div class="row header-footer">

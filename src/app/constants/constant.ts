@@ -1,13 +1,7 @@
 import { UserEntity } from '../interfaces/user-entity.model';
 import { Course } from '../coursesPageModule/interfaces/course.model';
 
-export const USER_DATA: UserEntity = {
-  id: 1,
-  firstName: 'Rahul',
-  lastName: 'Patil',
-};
-
-export const COURSES_LIST: Course[] = [
+export const courses: Course[] = [
   {
     id: 1,
     title: 'Java',

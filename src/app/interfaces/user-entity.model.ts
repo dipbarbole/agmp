@@ -1,5 +1,8 @@
 export interface UserEntity {
-    id: number;
-    firstName: string;
-    lastName: string;
+    id?: number;
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    password: string;
+    isAuthenticated: boolean;
 }
