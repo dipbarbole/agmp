@@ -5,9 +5,12 @@ app-root {
         color: #ffffff;
     }
 
-    .content {
-        // height: calc(100vh - 170px);
+    .main-container-div {
+        min-height: calc(100vh - 120px);
         // overflow-y: auto;
+    }
+
+    .content {
         -ms-overflow-style: none;
         scrollbar-width: none;
     }

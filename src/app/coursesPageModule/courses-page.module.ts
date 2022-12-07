@@ -4,16 +4,26 @@ import { CoursesPageComponent } from './courses-page.component';
 import { CourseItemComponent } from './components/courseItemComponent/course-item.component';
 import { FormsModule } from '@angular/forms';
 import { CustomBorderDirective } from '../shared/directives/custom-border.directive';
-import { CourseDurationPipe } from '../shared/pipes/course-duration/course-duration.pipe';
-import { CourseOrderByPipe } from '../shared/pipes/course-order/course-order.pipe';
-import { CourseFilterPipe } from '../shared/pipes/course-filter/course-filter.pipe';
 import { Route, RouterModule } from '@angular/router';
+import { AddCourseModule } from './components/addCourse/add-course.module';
+import { AddCourseComponent } from './components/addCourse/add-course.component';
+import { SharedPipesModule } from '../shared/pipes/shared-pipes.module';
 
 const routes: Route[] = [
   {
     path: '',
     component: CoursesPageComponent
-  }
+  },
+  {
+    path: 'add-course',
+    data: { title: 'Add course', breadcrumbs: ['Courses', 'Add Course'] },
+    component: AddCourseComponent,
+  },
+  {
+    path: ':id',
+    data: { title: 'Edit course', breadcrumbs: ['Courses', 'Edit Course'] },
+    component: AddCourseComponent,
+  },
 ];
 
 
@@ -22,17 +32,16 @@ const routes: Route[] = [
     CoursesPageComponent,
     CourseItemComponent,
     CustomBorderDirective,
-    CourseDurationPipe,
-    CourseOrderByPipe
   ],
   imports: [
     CommonModule,
     FormsModule,
     RouterModule.forChild(routes),
+    AddCourseModule,
+    SharedPipesModule
   ],
   exports: [
     CoursesPageComponent
-  ],
-  providers: [CourseFilterPipe],
+  ]
 })
 export class CoursesPageModule { }

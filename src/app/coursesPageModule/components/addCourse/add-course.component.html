@@ -1,0 +1,56 @@
+<div class="new-course-container">
+  <form class="content" [formGroup]="newCourseForm" (ngSubmit)="createCourse()">
+    <div class="title">
+      <span>{{ formTitle }}</span>
+    </div>
+    <div class="fields">
+      <div class="field-label">
+        <label>Title:</label>
+        <label>*required</label>
+      </div>
+      <input
+        type="text"
+        formControlName="title"
+        placeholder="Enter course title"
+      />
+    </div>
+    <div class="fields">
+      <div class="field-label">
+        <label>Description:</label>
+        <label>*required</label>
+      </div>
+      <app-field-description></app-field-description>
+    </div>
+    <div class="fields">
+      <div class="field-label">
+        <label>Date:</label>
+        <label>*required</label>
+      </div>
+      <app-field-date></app-field-date>
+    </div>
+    <div class="fields">
+      <div class="field-label">
+        <label>Duration:</label>
+        <label>*required</label>
+      </div>
+      <app-field-duration></app-field-duration>
+    </div>
+    <div class="fields">
+      <div class="field-label">
+        <label>Authors:</label>
+        <label>*required</label>
+      </div>
+      <app-field-authers></app-field-authers>
+    </div>
+    <div class="bottom-row">
+      <button type="button" (click)="cancelCourseCreation()">Cancel</button>
+      <button
+        type="submit"
+        [disabled]="newCourseForm.invalid"
+        [ngClass]="newCourseForm.invalid === false ? 'active' : 'disabled'"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -13,10 +14,12 @@ import { Course } from '../../interfaces/course.model';
   templateUrl: './course-item.component.html',
   styleUrls: ['./course-item.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseItemComponent implements OnInit {
   @Input() course: Course | any;
   @Output() courseId = new EventEmitter<number>();
+  @Output() editCourseId = new EventEmitter<number>();
 
   constructor() {}
 
@@ -26,5 +29,9 @@ export class CourseItemComponent implements OnInit {
     if (confirm('Do you really want to delete this course')) {
       this.courseId.emit(id);
     }
+  }
+
+  editCourse(id: number) {
+    this.editCourseId.emit(id);
   }
 }

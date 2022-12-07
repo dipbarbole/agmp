@@ -15,7 +15,7 @@
       </form>
     </div>
     <div class="col-12 add-course-button d-flex justify-content-end">
-      <button class="btn btn-primary">+ Add Course</button>
+      <button class="btn btn-primary" (click)="addNewCourse()">+ Add Course</button>
     </div>
   </div>
   <div class="course-list-content">
@@ -24,6 +24,7 @@
         *ngFor="let course of courseList; trackBy: trackFunction"
         [course]="course"
         (courseId)="deleteCourseById($event)"
+        (editCourseId)="onEditCourse($event)"
       ></app-course-item>
     </div>
     <div *ngIf="isDataEmpty" class="no-data-wrapper">

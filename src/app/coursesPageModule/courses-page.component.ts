@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { CourseFilterPipe } from '../shared/pipes/course-filter/course-filter.pipe';
 import { Course } from './interfaces/course.model';
 import { CoursesService } from './services/courses.service';
@@ -16,7 +17,11 @@ export class CoursesPageComponent implements OnInit {
   searchText: string = '';
   isDataEmpty: boolean = false;
 
-  constructor(private courseFilterPipe: CourseFilterPipe, private coursesService: CoursesService) {}
+  constructor(
+    private courseFilterPipe: CourseFilterPipe,
+    private coursesService: CoursesService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.refreshList();
@@ -24,11 +29,20 @@ export class CoursesPageComponent implements OnInit {
     this.isDataEmpty = this.courseList.length === 0;
   }
 
+  addNewCourse() {
+    this.router.navigateByUrl('/courses/add-course');
+  }
+
+  onEditCourse(courseId: number) {
+    this.router.navigateByUrl(`/courses/${courseId}`);
+  }
+
   searchAction(): void {
     this.courseList = this.courseFilterPipe.transform(
       this.searchText,
-      this.courses);
-      this.isDataEmpty = this.courseList.length === 0;
+      this.courses
+    );
+    this.isDataEmpty = this.courseList.length === 0;
   }
 
   deleteCourseById(courseId: number) {

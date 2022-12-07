@@ -2,14 +2,16 @@
   <div class="row header-footer">
     <app-header></app-header>
   </div>
-  <div class="container" *appIsAuthenticated="!isAuthenticated">
-    <div class="row">
-      <app-breadcrumbs></app-breadcrumbs>
+  <div class="main-container-div">
+    <div class="container" *appIsAuthenticated="!isAuthenticated">
+      <div class="row">
+        <app-breadcrumbs></app-breadcrumbs>
+      </div>
     </div>
-  </div>
-  <div class="container content">
-    <div class="row">
-      <router-outlet></router-outlet>
+    <div class="container content">
+      <div class="row">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
   <div class="row header-footer">

@@ -3,7 +3,7 @@ import { courses as Courses } from '../../constants/constant';
 import { Course } from '../interfaces/course.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CoursesService {
   courses = Courses;
@@ -18,9 +18,10 @@ export class CoursesService {
     return this.courses;
   }
 
-  // getById(id: number): Course {
-  //   return this.courses.find((course: Course) => course.id === id);
-  // }
+  getById(id: number): any {
+    const courseData = this.courses.find((course: Course) => course.id === id);
+    return courseData;
+  }
 
   // create(course: Course): Course {
   //   const newCourse = {
@@ -31,13 +32,20 @@ export class CoursesService {
   //   return newCourse;
   // }
 
+  createCourse(course: Course) {
+    console.log('Creating new course');
+    course.id = this.courses.length + 1;
+    const updatedCourses = [course, ...this.courses];
+    this.courses = updatedCourses;
+  }
+
   deleteCourse(id: number): void {
     const index = this.courses.findIndex((course: Course) => course.id === id);
     this.courses.splice(index, 1);
   }
 
   update(course: Course): Course {
-    const index = this.courses.findIndex((courseItem: Course) => courseItem.id === course.id);
+    const index = this.courses.findIndex((course: Course) => course.id === course.id);
     this.courses[index] = course;
     return course;
   }
