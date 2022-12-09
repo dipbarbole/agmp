@@ -1,0 +1,41 @@
+app-course-item {
+    .course-item-card {
+        margin: 0;
+        padding: 10px;
+        margin-top: 15px;
+        border: 1px solid rgb(189, 186, 186);
+        border-radius: 6px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+        .btn {
+            background-color: #30b6dd !important;
+        }
+        .edit-delete-button {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .delete-btn {
+                cursor: pointer;
+            }
+        }
+        .clock-calender {
+            @extend .edit-delete-button;
+            // justify-content: end;
+            .clock-calender-icon {
+                margin: 0px 7px !important;
+                color: rgb(185, 182, 182);
+            }
+        }
+
+        .card-desc {
+            margin-top: 10px;
+        }
+        .star-icon {
+            color: orange !important;
+        }
+        &.top-rated {
+            background-color: #feffc4;
+          }
+    }
+}

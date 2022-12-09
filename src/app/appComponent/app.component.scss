@@ -1,0 +1,21 @@
+app-root {
+    .header-footer {
+        background-color: #414452;
+        height: 60px;
+        color: #ffffff;
+    }
+
+    .main-container-div {
+        min-height: calc(100vh - 120px);
+        // overflow-y: auto;
+    }
+
+    .content {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .content::-webkit-scrollbar {
+        display: none;
+    }
+}

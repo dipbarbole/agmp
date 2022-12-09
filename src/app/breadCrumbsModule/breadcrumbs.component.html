@@ -1,0 +1,10 @@
+<div class="breadcrumb-container">
+  <ul class="breadcrumb" *ngIf="!isPageNotFound">
+    <li
+      *ngFor="let breadcrumb of breadcrumbs"
+      class="breadcrumb-item bread-title"
+    >
+      {{ breadcrumb.label }}
+    </li>
+  </ul>
+</div>
