@@ -11,6 +11,7 @@ import { CoursesService } from './services/courses.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class CoursesPageComponent implements OnInit {
+  counter: number = 3;
   courses: Course[] = [];
 
   courseList: Course[] = [];
@@ -23,6 +24,10 @@ export class CoursesPageComponent implements OnInit {
     private router: Router
   ) {}
 
+  get paginatedCourses(): Course[] {
+    return this.courses.slice(0, this.counter);
+  }
+
   ngOnInit(): void {
     this.refreshList();
     this.courseList = this.courses;
@@ -30,7 +35,7 @@ export class CoursesPageComponent implements OnInit {
   }
 
   addNewCourse() {
-    this.router.navigateByUrl('/courses/add-course');
+    this.router.navigateByUrl('/courses/new');
   }
 
   onEditCourse(courseId: number) {
@@ -52,13 +57,12 @@ export class CoursesPageComponent implements OnInit {
 
   loadMore(): void {
     console.log('Load more');
+    this.counter += 3;
+    this.refreshList();
   }
 
   refreshList(): void {
     this.courses = this.coursesService.getAll();
   }
 
-  trackFunction(index: any, item: { id: any }): any {
-    return item.id;
-  }
 }

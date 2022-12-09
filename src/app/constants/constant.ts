@@ -44,4 +44,20 @@ export const courses: Course[] = [
     description:
       'Information technology or IT courses involve the study of computers and networks to process, clean, store and secure business information or any type of information meant for professional purposes. Information Technology is a course that focuses on the regulation and security of data using electronic devices and software.',
   },
+  {
+    id: 6,
+    title: 'Ruby',
+    creationDate: new Date(),
+    duration: 72,
+    description:
+      'Information technology or IT courses involve the study of computers and networks to process, clean, store and secure business information or any type of information meant for professional purposes. Information Technology is a course that focuses on the regulation and security of data using electronic devices and software.',
+  },
+  {
+    id: 7,
+    title: '.Net',
+    creationDate: new Date('01/01/2023'),
+    duration: 190,
+    description:
+      'Information technology or IT courses involve the study of computers and networks to process, clean, store and secure business information or any type of information meant for professional purposes. Information Technology is a course that focuses on the regulation and security of data using electronic devices and software.',
+  },
 ];

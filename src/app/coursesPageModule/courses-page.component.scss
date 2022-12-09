@@ -33,6 +33,8 @@ app-courses-page {
             border: 1px solid rgb(189, 186, 186);
             border-radius: 6px;
             box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            cursor: pointer;
+            text-decoration: underline;
         }
 
         .search-field {

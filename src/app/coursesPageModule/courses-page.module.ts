@@ -12,16 +12,17 @@ import { SharedPipesModule } from '../shared/pipes/shared-pipes.module';
 const routes: Route[] = [
   {
     path: '',
+    data: { title: 'Courses', breadcrumbs: ['Courses'] },
     component: CoursesPageComponent
   },
   {
-    path: 'add-course',
-    data: { title: 'Add course', breadcrumbs: ['Courses', 'Add Course'] },
+    path: 'new',
+    data: { title: 'New Course', breadcrumbs: ['Courses', 'New Course'] },
     component: AddCourseComponent,
   },
   {
     path: ':id',
-    data: { title: 'Edit course', breadcrumbs: ['Courses', 'Edit Course'] },
+    data: { title: 'Edit Course', breadcrumbs: ['Courses', 'Edit Course'] },
     component: AddCourseComponent,
   },
 ];

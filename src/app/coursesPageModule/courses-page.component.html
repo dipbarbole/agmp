@@ -21,7 +21,7 @@
   <div class="course-list-content">
     <div>
       <app-course-item
-        *ngFor="let course of courseList; trackBy: trackFunction"
+        *ngFor="let course of paginatedCourses"
         [course]="course"
         (courseId)="deleteCourseById($event)"
         (editCourseId)="onEditCourse($event)"
@@ -31,7 +31,7 @@
       <span> NO DATA. FEEL FREE TO ADD NEW COURSE </span>
     </div>
     <div class="text-center load-more-button col-12">
-      <a href="#">LOAD MORE</a>
+      <p (click)="loadMore()">LOAD MORE</p>
     </div>
   </div>
 </div>
