@@ -15,19 +15,24 @@
       </form>
     </div>
     <div class="col-12 add-course-button d-flex justify-content-end">
-      <button class="btn btn-primary" (click)="addNewCourse()">+ Add Course</button>
+      <button class="btn btn-primary" (click)="addNewCourse()">
+        + Add Course
+      </button>
     </div>
   </div>
   <div class="course-list-content">
     <div>
       <app-course-item
-        *ngFor="let course of paginatedCourses"
+        *ngFor="
+          let course of courses$ | async | courseOrderBy;
+          trackBy: trackCourses
+        "
         [course]="course"
         (courseId)="deleteCourseById($event)"
         (editCourseId)="onEditCourse($event)"
       ></app-course-item>
     </div>
-    <div *ngIf="isDataEmpty" class="no-data-wrapper">
+    <div *ngIf="isDataEmpty$ | async" class="no-data-wrapper">
       <span> NO DATA. FEEL FREE TO ADD NEW COURSE </span>
     </div>
     <div class="text-center load-more-button col-12">

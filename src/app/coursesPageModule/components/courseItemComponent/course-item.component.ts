@@ -17,7 +17,7 @@ import { Course } from '../../interfaces/course.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CourseItemComponent implements OnInit {
-  @Input() course: Course | any;
+  @Input() course: Course;
   @Output() courseId = new EventEmitter<number>();
   @Output() editCourseId = new EventEmitter<number>();
 

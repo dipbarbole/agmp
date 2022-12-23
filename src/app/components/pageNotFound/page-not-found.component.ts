@@ -12,9 +12,7 @@ export class PageNotFoundComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.isAuthenticated$.subscribe(
-      (isAuthenticated) => (this.isLoggedIn = isAuthenticated)
-    );
+    this.isLoggedIn = this.authService.isAuthenticated();
   }
 
   backToHomePage() {

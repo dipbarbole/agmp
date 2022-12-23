@@ -8,13 +8,13 @@ import { FormControl, FormGroupDirective } from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
 })
 export class FieldDurationComponent implements OnInit {
-  duration: FormControl;
+  length: FormControl;
 
   constructor(private formGroupDirective: FormGroupDirective) {}
 
   ngOnInit() {
-    this.duration = this.formGroupDirective.control.get(
-      'duration'
+    this.length = this.formGroupDirective.control.get(
+      'length'
     ) as FormControl;
   }
 }

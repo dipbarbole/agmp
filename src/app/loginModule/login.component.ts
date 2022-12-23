@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [
+      login: new FormControl('flastname', [Validators.required]),
+      password: new FormControl('flastname', [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(10)
@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const userInfo: UserEntity = { ...this.loginForm.value, isAuthenticated: true };
     this.authService.login(userInfo);
-    console.log('Login Successfully');
     this.router.navigateByUrl('/courses');
   }
 }

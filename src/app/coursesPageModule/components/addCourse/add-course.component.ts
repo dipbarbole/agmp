@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CourseAuthorsPipe } from 'src/app/shared/pipes/course-authors/course-authors.pipe';
 import { Course } from '../../interfaces/course.model';
 import { CoursesService } from '../../services/courses.service';
 
@@ -18,9 +19,9 @@ import { CoursesService } from '../../services/courses.service';
 export class AddCourseComponent implements OnInit, AfterViewInit {
   formTitle: string = 'New Course';
   newCourseForm: FormGroup;
-  title: FormControl;
+  name: FormControl;
   description: FormControl;
-  duration: FormControl;
+  length: FormControl;
   date: FormControl;
   authors: FormControl;
 
@@ -30,26 +31,31 @@ export class AddCourseComponent implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     private courseService: CoursesService,
-    private routeActive: ActivatedRoute
+    private routeActive: ActivatedRoute,
+    private courseAuthorsPipe: CourseAuthorsPipe
   ) {
     this.courseId = Number(this.routeActive.snapshot.paramMap.get('id'));
     if (this.courseId) {
-      this.formTitle = 'Edit Course'
-      this.courseData = this.courseService.getById(this.courseId);
+      this.formTitle = 'Edit Course';
+      this.courseService.getCourseById(this.courseId).subscribe((course) => {
+        if (course) {
+          this.courseData = course;
+        }
+      });
     }
   }
 
   ngOnInit() {
-    this.title = new FormControl('', Validators.required);
+    this.name = new FormControl('', Validators.required);
     this.description = new FormControl('', Validators.required);
-    this.duration = new FormControl('', Validators.required);
+    this.length = new FormControl('', Validators.required);
     this.date = new FormControl('', Validators.required);
-    this.authors = new FormControl([], Validators.required);
+    this.authors = new FormControl([]);
 
     this.newCourseForm = new FormGroup({
-      title: this.title,
+      name: this.name,
       description: this.description,
-      duration: this.duration,
+      length: this.length,
       date: this.date,
       authors: this.authors,
     });
@@ -58,8 +64,13 @@ export class AddCourseComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if (this.courseId) {
       setTimeout(() => {
-        this.courseData.date = this.dateToYMD(this.courseData.creationDate);
-        this.newCourseForm.patchValue(this.courseData);
+        this.newCourseForm.patchValue({
+          name: this.courseData.name,
+          description: this.courseData.description,
+          length: this.courseData.length,
+          date: this.dateToYMD(this.courseData.date),
+          authors: this.courseAuthorsPipe.transform(this.courseData.authors),
+        });
       }, 0);
     }
   }
@@ -69,24 +80,24 @@ export class AddCourseComponent implements OnInit, AfterViewInit {
     var d = ed.getDate();
     var m = ed.getMonth() + 1;
     var y = ed.getFullYear();
-    return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
-}
+    return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+  }
 
   createCourse() {
     const formValue = this.newCourseForm.value;
     const newCourse: Course = {
       ...formValue,
-      creationDate: new Date(formValue.date),
-      authors: [formValue.authors]
+      authors: this.transformCourseAuthorsToAdd(formValue.authors),
     };
 
     if (this.courseId) {
       newCourse.id = this.courseId;
-      this.courseService.update(newCourse);
+      newCourse.authors = this.transformCourseAuthors(formValue.authors);
+      this.courseService.updateCourse(newCourse).subscribe();
     } else {
-      this.courseService.createCourse(newCourse);
+      this.courseService.createCourse(newCourse).subscribe();
     }
-   
+
     this.router.navigate(['/courses']);
   }
 
@@ -98,5 +109,27 @@ export class AddCourseComponent implements OnInit, AfterViewInit {
     if (confirm('Do you really want to cancel course creation?')) {
       this.router.navigate(['/courses']);
     }
+  }
+
+  transformCourseAuthors(authors: string) {
+    return authors.split(',').map((authorName: string, index: number) => {
+      const courseAuthor = this.courseData.authors.find((author) => {
+        const name = `${author.name}`;
+        return name === authorName;
+      });
+      return {
+        id: courseAuthor ? courseAuthor.id : index + 1,
+        name: authorName.trim(),
+      };
+    });
+  }
+
+  transformCourseAuthorsToAdd(authors: string) {
+    return authors.split(',').map((author: string, index: number) => {
+      return {
+        id: index + 1,
+        name: author.trim(),
+      };
+    });
   }
 }
