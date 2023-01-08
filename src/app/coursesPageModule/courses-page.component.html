@@ -1,18 +1,9 @@
 <div class="course-page-container">
   <div class="row">
     <div class="col-12 search-field">
-      <form class="d-inline-flex">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          [(ngModel)]="searchText"
-          name="searchText"
-        />
-        <button class="btn btn-success" (click)="searchAction()" type="button">
-          Search
-        </button>
-      </form>
+      <app-search-course
+        (courseSearch)="onCourseSearch($event)"
+      ></app-search-course>
     </div>
     <div class="col-12 add-course-button d-flex justify-content-end">
       <button class="btn btn-primary" (click)="addNewCourse()">

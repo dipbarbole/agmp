@@ -71,7 +71,7 @@ export class AddCourseComponent implements OnInit, AfterViewInit {
           date: this.dateToYMD(this.courseData.date),
           authors: this.courseAuthorsPipe.transform(this.courseData.authors),
         });
-      }, 0);
+      }, 10);
     }
   }
 

@@ -9,10 +9,13 @@ import { CoursesPageModule } from './coursesPageModule/courses-page.module';
 import '@fortawesome/fontawesome-free/js/all.js';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeaderInterceptor } from './interceptors/http-header.interceptor';
+import { LoaderComponent } from './components/loaderComponent/loader.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,12 @@ import { HttpHeaderInterceptor } from './interceptors/http-header.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpHeaderInterceptor,
       multi: true
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })
