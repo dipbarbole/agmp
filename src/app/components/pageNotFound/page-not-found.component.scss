@@ -1,0 +1,30 @@
+.page-not-found {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  span {
+    font-weight: 600;
+    font-size: 40px;
+  }
+  p {
+    &:first-of-type {
+      font-size: 25px;
+      font-weight: 600;
+    }
+    text-align: center;
+    font-size: 18px;
+  }
+  button {
+    padding: 6px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: #9bc837;
+    cursor: pointer;
+  }
+}
