@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
-import { UserEntity } from 'src/app/interfaces/user-entity.model';
+import { LoginModel, UserEntity } from 'src/app/interfaces/user-entity.model';
 import { Router } from '@angular/router';
+import { LoginUser } from '../store/actions/user.actions';
+import { AppState } from '../store/state/app.state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +15,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private store: Store<AppState>, private router: Router) {
   }
 
   ngOnInit() {
@@ -27,8 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const userInfo: UserEntity = { ...this.loginForm.value, isAuthenticated: true };
-    this.authService.login(userInfo);
-    this.router.navigateByUrl('/courses');
+    const userInfo: LoginModel = { ...this.loginForm.value };
+    this.store.dispatch(new LoginUser(userInfo));
   }
 }

@@ -1,9 +1,19 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, Observable, of } from 'rxjs';
-import { CourseFilterPipe } from '../shared/pipes/course-filter/course-filter.pipe';
+import { combineLatest, map, Observable, of } from 'rxjs';
+import { AppState } from '../store/state/app.state';
 import { Course } from './interfaces/course.model';
-import { CoursesService } from './services/courses.service';
+import { Store } from '@ngrx/store';
+import {
+  DeleteCourse,
+  GetCourses,
+  LoadMoreCourses,
+  SearchCourses,
+} from '../store/actions/courses.actions';
+import {
+  coursesSelector,
+  totalCoursesCountSelector,
+} from '../store/selectors/courses/courses.selectors';
 
 @Component({
   selector: 'app-courses-page',
@@ -19,13 +29,13 @@ export class CoursesPageComponent implements OnInit {
   isDataEmpty$: Observable<boolean>;
 
   constructor(
-    private courseFilterPipe: CourseFilterPipe,
-    private coursesService: CoursesService,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
-    this.courses$ = this.coursesService.getCourses();
+    this.store.dispatch(new GetCourses());
+    this.courses$ = this.store.select(coursesSelector);
     this.isDataEmpty$ = this.courses$.pipe(
       map((courses) => courses.length === 0)
     );
@@ -33,19 +43,18 @@ export class CoursesPageComponent implements OnInit {
 
   onCourseSearch(searchInput: string) {
     this.allCoursesLoaded$ = searchInput ? of(true) : of(false);
-    this.courses$ = this.coursesService.searchCourses(searchInput);
-    this.isDataEmpty$ = this.courses$.pipe(
-      map((courses) => courses.length === 0)
-    );
+    this.store.dispatch(new SearchCourses(searchInput));
   }
 
   loadMore() {
-    this.courses$ = this.coursesService.loadMoreCourses();
-    this.allCoursesLoaded$ = this.courses$.pipe(
-      map(
-        (courses) =>
-          courses.length >= this.coursesService.getTotalCoursesCount()
-      )
+    this.store.dispatch(new LoadMoreCourses());
+    this.allCoursesLoaded$ = combineLatest([
+      this.courses$,
+      this.store.select(totalCoursesCountSelector),
+    ]).pipe(
+      map(([courses, totalCoursesCount]) => {
+        return courses.length >= totalCoursesCount;
+      })
     );
   }
 
@@ -57,12 +66,6 @@ export class CoursesPageComponent implements OnInit {
     this.router.navigateByUrl(`/courses/${courseId}`);
   }
 
-  onDeleteCourse(courseId: number) {
-    this.coursesService
-      .deleteCourse(courseId)
-      .subscribe((_) => (this.courses$ = this.coursesService.getCourses()));
-  }
-
   trackCourses(index: number, course: Course): number {
     if (!course) {
       return null;
@@ -70,22 +73,7 @@ export class CoursesPageComponent implements OnInit {
     return course.id;
   }
 
-  ngOnDestroy() {
-    this.coursesService.resetCoursesLoadedCount();
-  }
-
-  searchAction(): void {
-    this.allCoursesLoaded$ = this.searchText ? of(true) : of(false);
-    this.courses$ = this.coursesService.searchCourses(this.searchText);
-    this.isDataEmpty$ = this.courses$.pipe(
-      map(courses => courses.length === 0)
-    );
-  }
-
   deleteCourseById(courseId: number) {
-    this.coursesService
-    .deleteCourse(courseId)
-    .subscribe((_) => (this.courses$ = this.coursesService.getCourses()));
-    console.log('Course has been deleted with id ', courseId);
+    this.store.dispatch(new DeleteCourse(courseId));
   }
 }

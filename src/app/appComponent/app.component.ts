@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AuthService } from '../shared/services/auth/auth.service';
+import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
+import { isUserAuthenticatedSelector, userSelector } from '../store/selectors/user/user.selectors';
+import { AppState } from '../store/state/app.state';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +13,14 @@ import { AuthService } from '../shared/services/auth/auth.service';
 export class AppComponent implements OnInit {
   isAuthenticated: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private store: Store<AppState>) {}
   ngOnInit(): void {
-    this.authService.isAuthenticated$.subscribe(
-      (isAuthenticated) => (this.isAuthenticated = isAuthenticated)
-    );
+    combineLatest([
+      this.store.select(userSelector),
+      this.store.select(isUserAuthenticatedSelector)
+    ]).subscribe(([user, isAuthenticated]) => {
+      // this.userInfo = user;
+      this.isAuthenticated = isAuthenticated;
+    });
   }
 }

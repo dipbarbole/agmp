@@ -11,12 +11,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeaderInterceptor } from './interceptors/http-header.interceptor';
 import { LoaderComponent } from './components/loaderComponent/loader.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { metaReducers, appReducers } from './store/reducers/app.reducers';
+import { UserEffects } from './store/effects/user.effects';
+import { CoursesEffects } from './store/effects/courses.effects';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoaderComponent
-  ],
+  declarations: [AppComponent, LoaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,20 +26,22 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
     FooterModule,
     CoursesPageModule,
     BreadcrumbsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(appReducers, { metaReducers }),
+    EffectsModule.forRoot([UserEffects, CoursesEffects]),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpHeaderInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
-      multi: true
+      multi: true,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

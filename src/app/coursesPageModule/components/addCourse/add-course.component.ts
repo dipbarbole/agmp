@@ -7,8 +7,10 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseAuthorsPipe } from 'src/app/shared/pipes/course-authors/course-authors.pipe';
+import { AppState } from 'src/app/store/state/app.state';
 import { Course } from '../../interfaces/course.model';
 import { CoursesService } from '../../services/courses.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-add-course',
@@ -32,7 +34,8 @@ export class AddCourseComponent implements OnInit, AfterViewInit {
     private router: Router,
     private courseService: CoursesService,
     private routeActive: ActivatedRoute,
-    private courseAuthorsPipe: CourseAuthorsPipe
+    private courseAuthorsPipe: CourseAuthorsPipe,
+    private store: Store<AppState>
   ) {
     this.courseId = Number(this.routeActive.snapshot.paramMap.get('id'));
     if (this.courseId) {

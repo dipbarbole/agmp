@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/state/app.state';
+import { isUserAuthenticatedSelector } from 'src/app/store/selectors/user/user.selectors';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private store: Store<AppState>, private router: Router) {}
 
   canActivate(): Observable<boolean> {
-    const isAuthenticated = this.authService.isAuthenticated();
+    let isAuthenticated;
+    this.store.select(isUserAuthenticatedSelector).subscribe((res) => {
+      isAuthenticated = res;
+    });
     if (isAuthenticated) {
       return of(true);
     }

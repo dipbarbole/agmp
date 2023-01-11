@@ -6,10 +6,14 @@ import { LoggedInAuthGuard } from './loginModule/guards/logged-in-auth-guard';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
     path: 'login',
     loadChildren: () =>
       import('./loginModule/login.module').then((m) => m.LoginModule),
-    canActivate: [LoggedInAuthGuard],
   },
   {
     path: 'courses',
@@ -20,22 +24,17 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
-  // {
-  //   path: '**',
-  //   component: PageNotFoundComponent,
-  // },
-  {
-    path: 'page-not-found',
+    path: '**',
     component: PageNotFoundComponent,
   },
-  {
-    path: '**',
-    redirectTo: '/page-not-found',
-  },
+  // {
+  //   path: 'page-not-found',
+  //   component: PageNotFoundComponent,
+  // },
+  // {
+  //   path: '**',
+  //   redirectTo: '/page-not-found',
+  // },
 ];
 
 @NgModule({
