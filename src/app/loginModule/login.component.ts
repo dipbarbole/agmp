@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { LoginModel, UserEntity } from 'src/app/interfaces/user-entity.model';
 import { Router } from '@angular/router';
 import { LoginUser } from '../store/actions/user.actions';

@@ -2,4 +2,8 @@
   type="text"
   [formControl]="description"
   placeholder="Add description"
+  maxlength="500"
+  [ngStyle]="{
+    'border-color': description.touched && description.errors ? 'red' : ''
+  }"
 ></textarea>

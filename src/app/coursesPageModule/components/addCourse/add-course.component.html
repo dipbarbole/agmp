@@ -12,6 +12,8 @@
         type="text"
         formControlName="name"
         placeholder="Enter course title"
+        maxlength="50"
+        [ngStyle]="{ 'border-color': name.touched && name.errors ? 'red' : '' }"
       />
     </div>
     <div class="fields">
